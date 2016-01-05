@@ -15,12 +15,14 @@ module.exports = function(proto) {
 
     var options = {
       redirect_uri: redirect_uri || this.redirect_uri,
-      scope: scope || this.scope
+      scope: scope || this.scope ? (scope || this.scope).join(' ') : null
     };
 
     if (state) {
       options.state = state;
     }
+
+    options = Object.assign(options, _options)
 
     return this.oauth2.authCode.authorizeURL(options);
   };
