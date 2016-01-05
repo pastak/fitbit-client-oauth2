@@ -11,7 +11,7 @@ module.exports = function(proto) {
     return this.oauth2_token.accessToken.create(tokenObj);
   };
 
-  proto.getAuthorizationUrl = function(redirect_uri, scope, state) {
+  proto.getAuthorizationUrl = function(redirect_uri, scope, state, _options) {
 
     var options = {
       redirect_uri: redirect_uri || this.redirect_uri,
