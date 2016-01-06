@@ -12,6 +12,14 @@ module.exports = function(proto) {
 
   };
 
+  proto.getSleepLog = function (token, options) {
+    options = helper.buildSleepLogOptions(options);
+    token = this.createToken(token);
+
+    options.access_token = token.token.access_token;
+    return helper.createRequestPromise(options);
+  }
+
   proto.getTimeSeries = function(token, options) {
     options = helper.buildTimeSeriesOptions(options);
     token = this.createToken(token);

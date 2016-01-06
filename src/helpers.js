@@ -55,6 +55,24 @@ function buildTimeSeriesOptions(options) {
   return options;
 }
 
+function buildSleepLogOptions(options) {
+  var url = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/sleep/date//{date}.json';
+  var d = new Date()
+  options = assign({
+    userId: '-',
+    date: `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+  }, options);
+
+  if (options.endDate) {
+    delete options.period;
+  }
+
+  options.url = url.replace('{userId}', options.userId)
+    .replace('{date}', options.date);
+
+  return options;
+}
+
 function buildIntradayTimeSeriesOptions(options) {
   var url = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/{resourcePath}/date/{startDate}/{endDate}/{detailLevel}{extra}.json';
 

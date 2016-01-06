@@ -1,26 +1,26 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var FitbitClient = require('fitbit-client-oauth2');
+var FitbitClient = require('../src/index');
 
 var app = express();
 
-var clientId = 'YOUR_CLIENT_ID';
-var clientSecret = 'YOUR_CLIENT_SECRET';
+var clientId = '227HS8';
+var clientSecret = '7b7ff41f5bafc532ebc7593c26743777';
 
 var client = new FitbitClient(clientId, clientSecret);
-var redirect_uri = 'http://localhost:3000/auth/fitbit/callback';
+var redirect_uri = 'http://localhost:3000/callback';
 
 app.use(bodyParser());
 
 app.get('/auth/fitbit', function(req, res) {
 
-  var auth_url = client.getAuthorizationUrl('http://localhost:3000/auth/fitbit/callback');
+  var auth_url = client.getAuthorizationUrl('http://localhost:3000/callback', [ 'activity','profile', 'sleep', 'heartrate'], '', {expires_in: 2592000});
 
   res.redirect(auth_url);
 
 });
 
-app.get('/auth/fitbit/callback', function(req, res, next) {
+app.get('/callback', function(req, res, next) {
 
   client.getToken(req.query.code, redirect_uri)
     .then(function(token) {
