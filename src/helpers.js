@@ -8,7 +8,8 @@ module.exports = {
   createRequestPromise: createRequestPromise,
   buildTimeSeriesOptions: buildTimeSeriesOptions,
   buildIntradayTimeSeriesOptions: buildIntradayTimeSeriesOptions,
-  buildDailyActivitySummaryOptions: buildDailyActivitySummaryOptions
+  buildDailyActivitySummaryOptions: buildDailyActivitySummaryOptions,
+  buildSleepLogOptions: buildSleepLogOptions
 };
 
 function createRequestPromise(options) {
@@ -56,7 +57,7 @@ function buildTimeSeriesOptions(options) {
 }
 
 function buildSleepLogOptions(options) {
-  var url = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/sleep/date//{date}.json';
+  var url = config.FITBIT_BASE_API_URL_TOKEN + '/1/user/{userId}/sleep/date/{date}.json';
   var d = new Date()
   options = assign({
     userId: '-',
